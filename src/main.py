@@ -17,10 +17,12 @@ def index():
         error = insertarParticipante(nombre, email)
         if error:
             return render_template('index.html', error = error)
-        return redirect('home')
-    context = {
+
+    participantes = sacarParticipantes()
+    context = { 
         'titulo': 'Bienvenido !!',
-        'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.'
+        'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.',
+        'participantes' : participantes
     }
     return render_template('index.html', **context)
 
