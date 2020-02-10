@@ -3,6 +3,7 @@ from flask import session
 import datetime
 import time
 import calendar
+import random
 
 
 MONGO_URL_ATLAS = 'mongodb+srv://franjimenez:Francisco1231998@develop-0hasi.mongodb.net/test?retryWrites=true&w=majority'
@@ -12,6 +13,8 @@ client = MongoClient(MONGO_URL_ATLAS, ssl_cert_reqs = False)
 db = client['sorteoweb']
 
 collection = db['participantes']
+
+contador = None
 
 def insertarParticipante(nombre, email):
     """
@@ -50,8 +53,7 @@ def introducirPremios():
 def sacarPremios():
     fecha = time.strftime("%d/%m/%y")
     fechaCortada = fecha.split('/', 2)
-    dt = datetime.date(int(fechaCortada[2]),int(fechaCortada[1]), int(fechaCortada[0]))
-    wk = dt.isocalendar()[1]
-    print(wk)
-
-sacarPremios()
+    fechaAdate = datetime.date(int(fechaCortada[2]),int(fechaCortada[1]), int(fechaCortada[0]))
+    wk = fechaAdate.isocalendar()[1]
+    
+    resultados = collection.find({'activo':1}, {'premio':1})
