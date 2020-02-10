@@ -1,12 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Hello Docker</title>
-  </head>
-  <body>
-    <h1>Hola DOCKER !!!!!</h1>
-  </body>
-</html>
+{% extends 'layout.html' %} 
+{% block title %}
+   {{ super() }}
+      Participa 
+{%endblock %} 
+
+{% block main %}
+
+<div class="columns">
+    
+  <div class="column is-success">
+    <h1>Instrucciones para participar:</h1>
+    <br>
+    <ul>
+      <li><strong>1.</strong> Se realiza un sorteo por semana, tienes opción a partcipar en un sorteo cada mes. </li>
+      <li><strong>2.</strong> El último sorteo del mes solo es para los ganadores de las semanas anteriores.</li>
+      <li><strong>3.</strong> Puedes intentarlo cada mes.</li>
+      <li><strong>4.</strong> El ganador de cada sorteo será escogido al azar entre la lista de participantes.</li>
+      <li><strong>5.</strong> Podrás consultar el la cuenta atrás del sorteo en cualquier momento y ver la lista de participantes mas abajo.</li>
+      <li><strong>6.</strong> Al acabar el sorteo recibirás un email con el resultado.</li>
+      <li><strong>7.</strong> Mucha suerte a todos !!</li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <h1>Estado del Sorteo:</h1>
+    <br>
+  </div>
+
+</div>
+
+<form action="{{ url_for('index') }}" method="POST">
+<div class="field">
+  <label class="label">Nombre de Usuario :</label>
+  <div class="control">
+    <input
+      class="input"
+      name="nombre"
+      type="text"
+      placeholder="Fran Olivares"
+      required
+    />
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Email :</label>
+  <div class="control has-icons-left has-icons-right">
+    <input
+      class="input"
+      name="email"
+      type="email"
+      placeholder="example@example.com"
+      required
+    />
+  </div>
+
+  {% if error == True %}
+  <article class="message is-danger">
+    <div class="message-header">
+      <p>ERROR</p>
+    </div>
+    <div class="message-body">
+      El email que has introducido ya existe en la base de datos.
+    </div>
+  </article>
+
+  {% endif %}
+</div>
+
+<div class="field">
+  <div class="control">
+    <label class="checkbox">
+      <input type="checkbox" required />
+      Acepto los <a href="#">terminos y condiciones.</a>
+    </label>
+  </div>
+</div>
+
+<div class="field">
+  <div class="control">
+    <button type="submit" class="button is-link">Participar</button>
+  </div>
+</div>
+
+</form>
+
+{% endblock %}

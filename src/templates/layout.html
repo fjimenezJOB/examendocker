@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,18 @@
     <section class="section">
         <div class="container">
             {% block header %}
+            <section class="hero">
+                <div class="hero-body">
+                  <div class="container">
+                    <h1 class="title">
+                      {{ titulo }}
+                    </h1>
+                    <h2 class="subtitle">
+                      {{ subtitulo }}
+                    </h2>
+                  </div>
+                </div>
+              </section>
 
             {% endblock %}
 
@@ -19,6 +31,14 @@
 
             {% block footer %}
 
+            <footer class="footer">
+              <div class="content has-text-centered">
+                <p>
+                  <strong>VOLTEX</strong> by Fran Jimenez. El codigo de esta aplicación web esta sujeto a la licencia del 
+                  <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+                </p>
+              </div>
+            </footer>
             {% endblock %}
         </div>
     </section>
