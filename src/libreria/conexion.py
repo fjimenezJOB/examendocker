@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 from flask import session
+import datetime
 import time
+import calendar
 
 
 MONGO_URL_ATLAS = 'mongodb+srv://franjimenez:Francisco1231998@develop-0hasi.mongodb.net/test?retryWrites=true&w=majority'
@@ -37,6 +39,19 @@ def sacarParticipantes():
     for documento in resultados:
         if documento['activo'] == 1:
             listaParticipantes.append(documento)
-    print(listaParticipantes)
-    
     return listaParticipantes
+
+collection = db['premios']
+
+def introducirPremios():
+    fecha = time.strftime("%d/%m/%y")
+    collection.insert_one({'premio':'Gafas de sol Ray Ban estilo aviador','fecha':fecha, 'activo': 1})
+
+def sacarPremios():
+    fecha = time.strftime("%d/%m/%y")
+    fechaCortada = fecha.split('/', 2)
+    dt = datetime.date(int(fechaCortada[2]),int(fechaCortada[1]), int(fechaCortada[0]))
+    wk = dt.isocalendar()[1]
+    print(wk)
+
+sacarPremios()

@@ -26,13 +26,13 @@ def index():
     }
     return render_template('index.html', **context)
 
-@app.route('/home')
+@app.route('/admin', methods=['POST', 'GET'])
 def home():
     context = {
-        'titulo' : 'Bienvenido al sorteo ' + session['nombre'],
-        'subtitulo' : 'Estas registrado como ' + session['email']
+        'titulo' : 'Bienvenido Admin'
     }
-    return render_template('home.html', **context )
+
+    return render_template('admin.html', **context )
     
 
 if __name__ == "__main__":
