@@ -36,13 +36,28 @@
 </div>
 <article class="message">
   <div class="message-header">
-    <p>Hello World</p>
+    <p>Hola Participantes !!!</p>
     <button class="delete" aria-label="delete"></button>
   </div>
   <div class="message-body">
     <strong>Informamos que quedan {{diasRestantes}} dias restantes para el sorteo. SUERTE!!!</strong>
   </div>
 </article>
+{% if diasRestantes == '0' %}
+<article class="message">
+  <div class="message-header">
+    <p><strong>PREMIO!!!</strong></p>
+    <button class="delete" aria-label="delete"></button>
+  </div>
+  <div class="message-body">
+    <p><strong>Premio Random:</strong> {{premio}}</p>
+    <p><strong>Le ha tocado a :</strong> {{premiado}}</p>
+    <br>
+    <h1>FELICIDADES {{premiado}} !!!</h1>
+    <p>Igual que siempre nos pondremos en contacto contigo por correo electrónico.</p>
+  </div>
+</article>
+{% endif %}
 
 <form action="{{ url_for('index') }}" method="POST">
 <div class="field">

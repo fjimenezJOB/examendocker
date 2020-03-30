@@ -21,17 +21,39 @@ def index():
     participantes = sacarParticipantes()
     premios = sacarPremios()
     diasRestantes = logicaFecha()
-    context = { 
-        'titulo': 'Bienvenido !!',
-        'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.',
-        'participantes' : participantes,
-        'premios' : premios,
-        'diasRestantes' : diasRestantes
-    }
+
+    if diasRestantes == "0":
+        numeroRandom = random.randrange(0,len(premios))
+        randomPremiado = random.randrange(0, len(participantes))
+        premiado = participantes[randomPremiado]
+        premio = premios[numeroRandom]
+
+        context = { 
+            'titulo': 'Bienvenido !!',
+            'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.',
+            'participantes' : participantes,
+            'premios' : premios,
+            'diasRestantes' : diasRestantes,
+            'premio': premio['premio'],
+            'premiado' : premiado['nombre']
+        }
+    else:
+        context = { 
+            'titulo': 'Bienvenido !!',
+            'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.',
+            'participantes' : participantes,
+            'premios' : premios,
+            'diasRestantes' : diasRestantes
+        }
+
     return render_template('index.html', **context)
 
 @app.route('/admin', methods=['POST', 'GET'])
 def home():
+    if request.method == 'POST':
+        nuevaFecha = request.form.get('fecha')
+        print(nuevaFecha)
+        subirFecha(nuevaFecha)
     context = {
         'titulo' : 'Bienvenido Admin'
     }
