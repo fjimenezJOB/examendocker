@@ -25,7 +25,11 @@
 
   <div class="column">
     <h1 class="title">Premio de esta semana:</h1>
-    
+    <ul>
+    {% for premio in premios %}
+      <li>{{premio['premio']}}</li>
+    {% endfor %}
+    </ul>
     <br>
   </div>
 

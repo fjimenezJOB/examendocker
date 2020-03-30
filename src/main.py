@@ -11,7 +11,6 @@ def index():
     if request.method == 'POST':
         nombre = request.form.get('nombre')
         email = request.form.get('email')
-        print(nombre)
         session['nombre'] = nombre
         session['email'] = email
         error = insertarParticipante(nombre, email)
@@ -19,10 +18,13 @@ def index():
             return render_template('index.html', error = error)
 
     participantes = sacarParticipantes()
+    print(participantes)
+    premios = sacarPremios()
     context = { 
         'titulo': 'Bienvenido !!',
         'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.',
-        'participantes' : participantes
+        'participantes' : participantes,
+        'premios' : premios
     }
     return render_template('index.html', **context)
 
@@ -31,7 +33,6 @@ def home():
     context = {
         'titulo' : 'Bienvenido Admin'
     }
-
     return render_template('admin.html', **context )
     
 
