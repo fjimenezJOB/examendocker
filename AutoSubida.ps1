@@ -1,9 +1,9 @@
 ﻿docker-compose build
-docker tag examendocker fjimenezjob/examendocker
-docker push  fjimenezjob/examendocker
+docker tag sorteofinal fjimenezjob/sorteofinal
+docker push  fjimenezjob/sorteofinal
 heroku login
-heroku create examendocker
+heroku create sorteofinal
 heroku container:login 
-heroku container:push web --app examendocker
-heroku container:release web --app examendocker
+heroku container:push web --app sorteofinal
+heroku container:release web --app sorteofinal
 exit
