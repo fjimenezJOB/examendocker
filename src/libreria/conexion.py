@@ -47,3 +47,25 @@ def sacarPremios():
     for i in resultados:
         lista.append(i)
     return lista
+
+def subirFecha(fecha):
+    collection = db['fechaSorteo']
+    collection.replace_one({}, {'sorteo': fecha})
+
+def recogerFecha():
+    fecha = None
+    collection = db['fechaSorteo']
+    fecha_dic = collection.find({},{'sorteo':1})
+    for fechas in fecha_dic:
+        fecha = fechas['sorteo']
+    return fecha
+
+
+def logicaFecha():
+    fechaSorteo = recogerFecha()
+    fechaSeparada = fechaSorteo.split('/', 3)
+    fecha_hoy = datetime.datetime.now()
+    dia_hoy = fecha_hoy.day
+    fecha_x = datetime.datetime(int(fechaSeparada[0]),int(fechaSeparada[1]),int(fechaSeparada[2]))
+    resultado = fecha_hoy - fecha_x
+    return str(resultado.days)

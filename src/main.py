@@ -14,17 +14,19 @@ def index():
         session['nombre'] = nombre
         session['email'] = email
         error = insertarParticipante(nombre, email)
+
         if error:
             return render_template('index.html', error = error)
 
     participantes = sacarParticipantes()
-    print(participantes)
     premios = sacarPremios()
+    diasRestantes = logicaFecha()
     context = { 
         'titulo': 'Bienvenido !!',
         'subtitulo': 'Solo tienes que registrar tu Nombre y tu correo electronico para participar.',
         'participantes' : participantes,
-        'premios' : premios
+        'premios' : premios,
+        'diasRestantes' : diasRestantes
     }
     return render_template('index.html', **context)
 
